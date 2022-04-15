@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductMapper">
+
+	<resultMap id="productSelectMap" type="product">
+		<result property="prodNo" column="prod_no" jdbcType="NUMERIC" />
+		<result property="prodCode" column="prod_code"
+			jdbcType="NUMERIC" />
+		<result property="sellerId" column="seller_id"
+			jdbcType="VARCHAR" />
+		<result property="prodName" column="prod_name"
+			jdbcType="VARCHAR" />
+		<result property="prodDetail" column="prod_detail"
+			jdbcType="VARCHAR" />
+		<result property="dueDate" column="due_date" jdbcType="VARCHAR" />
+		<result property="cost" column="cost" jdbcType="NUMERIC" />
+		<result property="price" column="price" jdbcType="NUMERIC" />
+		<result property="fileName" column="image_file"
+			jdbcType="VARCHAR" />
+		<result property="regDate" column="reg_date" jdbcType="DATE" />
+	</resultMap>
+
+
+	<!-- INSERT -->
+	<insert id="addProduct" parameterType="product">
+		INSERT
+		INTO product
+		VALUES (seq_product_prod_no.nextval, #{prodCode}, #{sellerId},
+		#{prodName}, #{prodDetail}, #{dueDate}, #{cost}, #{price},
+		#{fileName : VARCHAR}, SYSDATE)
+	</insert>
+
+
+	<!-- SELECT One -->
+	<select id="getProduct" parameterType="int" resultMap="productSelectMap">
+		SELECT *
+		FROM product
+		WHERE prod_no = #{value}
+	</select>
+
+
+	<!-- UPDATE -->
+	<update id="updateProduct" parameterType="product">
+		UPDATE product
+		<set>
+			prod_code = #{prodCode},
+			prod_name = #{prodName},
+			prod_detail =
+			#{prodDetail},
+			due_date = #{dueDate},
+			cost = #{cost},
+			price = #{price},
+			image_file = #{fileName : VARCHAR}
+		</set>
+		WHERE prod_no = #{prodNo}
+	</update>
+	
+	
+	<!-- SELECT LIST :: ALL-->
+	<select id="getProductList" parameterType="search"
+		resultMap="productSelectMap">
+		SELECT *
+		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
+				FROM 	( 	SELECT prod_code, prod_no, prod_name, price, cost, due_date
+							FROM product
+							<if test="searchCondition != null">
+								<where>
+									<if test="searchCondition >=100">
+										prod_code = #{searchCondition}
+									</if>
+									<if test="searchCondition == 0 and searchKeyword !='' ">
+										prod_name LIKE '%' || #{searchKeyword} || '%'
+									</if>
+									<if test="searchCondition == 1 and searchKeyword !='' ">
+										prod_no LIKE '%' || #{searchKeyword} || '%'
+									</if>
+								</where>
+							</if>
+							ORDER BY prod_no DESC) inner_table
+				WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+
+
+	<!-- SELECT Row count -->
+	<select id="getTotalCount" parameterType="search" resultType="int">
+		SELECT COUNT(*)
+		FROM ( 	SELECT prod_code, prod_no, prod_name, price, cost, due_date
+				FROM product
+				<if test="searchCondition != null">
+					<where>
+						<if test="searchCondition >=100">
+							prod_code = #{searchCondition}
+						</if>
+						<if test="searchCondition == 0 and searchKeyword !='' ">
+							prod_name LIKE '%' || #{searchKeyword} || '%'
+						</if>
+						<if test="searchCondition == 1 and searchKeyword !='' ">
+							prod_no LIKE '%' || #{searchKeyword} || '%'
+						</if>			
+					</where>		
+				</if> ) countTable
+	</select>
+</mapper>

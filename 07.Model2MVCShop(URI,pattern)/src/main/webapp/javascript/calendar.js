@@ -1,8 +1,8 @@
 		function show_calendar(str_target, str_datetime) 
 		{ 
 
-		   var arr_months = ["1¿ù", "2¿ù", "3¿ù", "4¿ù", "5¿ù", "6¿ù","7¿ù", "8¿ù", "9¿ù", "10¿ù", "11¿ù", "12¿ù"]; 
-	        var week_days = ["¿ù", "È­", "¼ö", "¸ñ", "±İ", "Åä", "ÀÏ"]; 
+		   var arr_months = ["1ì›”", "2ì›”", "3ì›”", "4ì›”", "5ì›”", "6ì›”","7ì›”", "8ì›”", "9ì›”", "10ì›”", "11ì›”", "12ì›”"]; 
+	        var week_days = ["ì›”", "í™”", "ìˆ˜", "ëª©", "ê¸ˆ", "í† ", "ì¼"]; 
 	        var n_weekstart = 0; 
 	
 	        var dt_datetime = ((str_datetime ==null||str_datetime=="")? new Date():tuning2dt(str_datetime,str_target));
@@ -41,11 +41,11 @@
 		                "<title>Calendar</title>\n"+ 
 		                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"+
 		                "<style>\n"+
-	                    "td {font-size: 11px; color: #222222; text-decoration: none; font-family:verdana, µ¸¿ò; line-height:15px}\n"+
-	                    "A:link    {font-size: 11px; color: #222222; text-decoration: none; font-family:verdana, µ¸¿ò}\n"+
-	                    "A:visited {font-size: 11px; color: #222222; text-decoration: none; font-family:verdana, µ¸¿ò}\n"+
-	                    "A:active  {font-size: 11px; color: #222222; text-decoration: none; font-family:verdana, µ¸¿ò}\n"+
-	                    "A:hover   {font-size: 11px; color: #222222; text-decoration: none; font-family:verdana, µ¸¿ò}\n"+
+	                    "td {font-size: 11px; color: #222222; text-decoration: none; font-family:verdana, ë‹ì›€; line-height:15px}\n"+
+	                    "A:link    {font-size: 11px; color: #222222; text-decoration: none; font-family:verdana, ë‹ì›€}\n"+
+	                    "A:visited {font-size: 11px; color: #222222; text-decoration: none; font-family:verdana, ë‹ì›€}\n"+
+	                    "A:active  {font-size: 11px; color: #222222; text-decoration: none; font-family:verdana, ë‹ì›€}\n"+
+	                    "A:hover   {font-size: 11px; color: #222222; text-decoration: none; font-family:verdana, ë‹ì›€}\n"+
 	                    "</style>\n"+ 
 		                "</head>\n"+
 		                "<body background=\"/eMarketPlace/images/others/ct_diary_bg2.gif\" style=\"margin:8\">\n"+ 
@@ -53,7 +53,7 @@
 		                "<tr><td align=\"center\" background=\"/eMarketPlace/images/others/ct_diary_bg.gif\" bgcolor=\"#ffffff\" style=\"border:FFFFFF solid 1px; padding:11 9 9 9\">\n"+ 
 		                "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n"+ 
 		                "<tr>\n  <td height=\"20\" align=\"center\">\n"+
-		                "<!-- -------- ¿ù Ç¥½Ã S  -------- -->\n"+
+		                "<!-- -------- ì›” í‘œì‹œ S  -------- -->\n"+
 		                "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr>\n"+
 		                "<td>"+
 						"<a href=\"javascript:window.opener.show_calendar('"+ str_target+"', '"+ tuning(dt_prev_year)+"');\">"+ 
@@ -62,19 +62,19 @@
 		                "<img src=\"/images/others/ct_diary_btn1.gif\" width=\"15\" height=\"13\" border=\"0\"></a>"+
 						"</td>\n"+ 
 		                "<td align=\"center\"  width=\"85\"><font size=\"2\">" 
-		                +dt_datetime.getFullYear()+"³â "+arr_months[dt_datetime.getMonth()]+"</font></td>\n"+ 
+		                +dt_datetime.getFullYear()+"ë…„ "+arr_months[dt_datetime.getMonth()]+"</font></td>\n"+ 
 		                "<td align=\"right\">"+
 						"<a href=\"javascript:window.opener.show_calendar('" +str_target+"', '"+tuning(dt_next_month)+"');\">"+ 
 		                "<img src=\"/images/others/ct_diary_btn2.gif\" width=\"15\" height=\"13\" border=\"0\"></a> "+
 						"<a href=\"javascript:window.opener.show_calendar('" +str_target+"', '"+tuning(dt_next_year)+"');\">"+ 
 		                "<img src=\"/images/others/ct_diary_btn2.gif\" width=\"15\" height=\"13\" border=\"0\"></a>"+
 						"</td>\n</tr>\n</table>\n"+ 
-		                "<!-- -------- ¿ù Ç¥½Ã E  -------- -->\n"+
+		                "<!-- -------- ì›” í‘œì‹œ E  -------- -->\n"+
 		                "</td>\n</tr>\n<tr>\n<td bgcolor=\"EBEFF7\" height=\"1\">\n</td>\n</tr>\n<tr>\n"+
 						"<td height=\"23\" align=\"center\" valign=\"bottom\"><img src=\"/images/others/ct_diary_title.gif\"></td>\n"+
 					    "</tr>\n<tr>\n<td bgcolor=\"E5E5E5\" height=\"2\"></td>\n"+
 					    "</tr>\n<tr>\n<td>\n"+
-					    "<!-- -------- ³¯Â¥ ¸®½ºÆ® Å×ÀÌºí S  -------- -->\n"+
+					    "<!-- -------- ë‚ ì§œ ë¦¬ìŠ¤íŠ¸ í…Œì´ë¸” S  -------- -->\n"+
 						"<table width=\"168\" border=\"0\" cellpadding=\"0\" cellspacing=\"1\" bgcolor=\"E5E5E5\">\n"
 		        ); 
 		
@@ -119,7 +119,7 @@
 		        }
 		        str_buffer +=
 		                "</table>\n" +
-		                "<!-- -------- ³¯Â¥ ¸®½ºÆ® Å×ÀÌºí E  -------- -->\n"+
+		                "<!-- -------- ë‚ ì§œ ë¦¬ìŠ¤íŠ¸ í…Œì´ë¸” E  -------- -->\n"+
 		                "</td>\n</tr>\n</table>\n</td>\n</tr>\n</table>\n" +
 		                "</body>\n" +
 		                "</html>\n";
@@ -138,7 +138,7 @@
 		{
 			var re_date = /^(\d+)\-(\d+)\-(\d+)$/; 
 	        if (!re_date.exec(str_datetime))
-				return errorTurn("³¯Â¥ Çü½ÄÀÌ Àß¸ø µÇ¾ú½À´Ï´Ù. Çü½Ä('YYYYMMDD')",str_target); 
+				return errorTurn("ë‚ ì§œ í˜•ì‹ì´ ì˜ëª» ë˜ì—ˆìŠµë‹ˆë‹¤. í˜•ì‹('YYYYMMDD')",str_target); 
 
 			return (new Date (RegExp.$1, RegExp.$2-1, RegExp.$3)); 
 		}
