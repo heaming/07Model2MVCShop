@@ -137,10 +137,9 @@ public class ProductController {
 		
 		productService.updateProduct(product);
 
-		System.out.println(product);
-		// product = productService.getProduct(product.getProdNo());
+		product = productService.getProduct(product.getProdNo());
 
-		return  "redirect:/getProduct.do?prodNo="+product.getProdNo()+"&menu="+menu;
+		return  "redirect:/product/getProduct?prodNo="+product.getProdNo()+"&menu="+menu;
 
 	}
 

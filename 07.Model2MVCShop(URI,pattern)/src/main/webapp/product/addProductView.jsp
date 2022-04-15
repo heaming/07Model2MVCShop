@@ -10,7 +10,7 @@
 <title>상품등록</title>
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 
-<script type="text/javascript" src="../javascript/calendar.js">
+<script src="/javascript/calendar.js">
 	
 </script>
 

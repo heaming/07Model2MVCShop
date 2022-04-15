@@ -134,10 +134,10 @@
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<c:if test="${menu.equals('manage') && user.userId.equals(product.sellerId)}">
+						<c:if test="${user.userId.equals(product.sellerId)}">
 							<a href="/product/updateProduct?prodNo=${product.prodNo}&menu=${menu}">수정</a>
 						</c:if>
-						<c:if test="${menu.equals('manage') && !(user.userId.equals( product.sellerId ))}">
+						<c:if test="${!(user.userId.equals( product.sellerId ))}">
 							<a href="/product/addPurchase?prodNo=${product.prodNo}&menu=${menu}">구매</a>						
 						</c:if>
 					</td>
