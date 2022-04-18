@@ -73,7 +73,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="Depth03"><a href="/product/listSale?menu=manage"
+							<td class="Depth03"><a href="/purchase/listSale?menu=manage"
 								target="rightFrame">판매내역관리</a></td>
 						</tr>
 						<tr>
@@ -95,17 +95,17 @@
 
 					<c:if test="${ !empty user && user.role == 'user'}">
 						<tr>
-							<td class="Depth03"><a href="/product/addProduct"
+							<td class="Depth03"><a href="/product/addProduct?menu=manage"
 								target="rightFrame">판매상품등록</a></td>
 						</tr>
 
 						<tr>
-							<td class="Depth03"><a href="/product/listPurchase"
-								target="rightFrame">구매이력조회</a></td>
+							<td class="Depth03"><a href="/purchase/listPurchase?menu=search"
+								target="rightFrame">내가 산 물건</a></td>
 						</tr>
 						<tr>
-							<td class="Depth03"><a href="/product/listSale?menu=manage"
-								target="rightFrame">구매이력조회</a></td>
+							<td class="Depth03"><a href="/purchase/listSale?menu=search"
+								target="rightFrame">내가 판 물건</a></td>
 						</tr>
 					</c:if>
 

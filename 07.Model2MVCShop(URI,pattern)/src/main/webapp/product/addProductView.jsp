@@ -42,7 +42,7 @@
 
 		/*
 		if(fileName != null) {
-			document.detailForm.imageForm.action='/fileUploadAction.do';
+			document.detailForm.imageForm.action='/fileUploadAction';
 			document.detailForm.imageForm.submit();
 		}
 		 */
