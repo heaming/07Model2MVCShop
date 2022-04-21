@@ -18,12 +18,12 @@
 	function fncAddProduct() {
 		
 		//Form 유효성 검증
-		/*
+
 		var name = document.detailForm.prodName.value;
 		var detail = document.detailForm.prodDetail.value;
 		var dueDate = document.detailForm.dueDate.value;
 		var price = document.detailForm.price.value;
-
+		
 		if (name == null || name.length < 1) {
 			alert("상품명은 반드시 입력하여야 합니다.");
 			return;
@@ -40,7 +40,7 @@
 			alert("가격은 반드시 입력하셔야 합니다.");
 			return;
 		}
-*/
+		
 		document.detailForm.action = '/product/addProduct';
 		document.detailForm.submit();
 	}
@@ -176,7 +176,7 @@
 				<td width="104" class="ct_write">상품이미지</td>
 				<td bgcolor="D6D6D6" width="1"></td>
 				<td class="ct_write01">
-					<input type="file" name="file"
+					<input type="file" name="multiFile"
 					class="ct_input_g" style="width: 200px; height: 19px"
 					maxLength="13" multiple>
 				</td>

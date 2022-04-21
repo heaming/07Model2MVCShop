@@ -106,7 +106,14 @@
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td height="26">
-						<img src="/images/uploadFiles/${product.fileName}"/>
+						<c:if test="${empty product.fileName}">
+							이미지 없음
+						</c:if>
+						
+						
+						<c:forEach items="${product.fileName}" var="file">
+							<img src="/images/uploadFiles/${file}"/>
+						</c:forEach>	
 					</td>
 				</tr>
 			</table>

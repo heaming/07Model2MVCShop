@@ -19,8 +19,7 @@
 		<result property="dueDate" column="due_date" jdbcType="VARCHAR" />
 		<result property="cost" column="cost" jdbcType="NUMERIC" />
 		<result property="price" column="price" jdbcType="NUMERIC" />
-		<result property="fileName" column="image_file"
-			jdbcType="VARCHAR" />
+		<result property="fileName" column="image_file" jdbcType="VARCHAR" />
 		<result property="regDate" column="reg_date" jdbcType="DATE" />
 	</resultMap>
 
@@ -29,14 +28,18 @@
 	<insert id="addProduct" parameterType="product">
 		INSERT
 		INTO product
-		VALUES (seq_product_prod_no.nextval, #{prodCode}, #{sellerId},
-		#{prodName}, #{prodDetail}, #{dueDate}, #{cost}, #{price},
-		#{fileName : VARCHAR}, SYSDATE)
+		VALUES
+		(seq_product_prod_no.nextval, #{prodCode}, #{sellerId},
+		#{prodName},
+		#{prodDetail}, #{dueDate}, #{cost}, #{price},
+		#{fileName : VARCHAR},
+		SYSDATE)
 	</insert>
 
 
 	<!-- SELECT One -->
-	<select id="getProduct" parameterType="int" resultMap="productSelectMap">
+	<select id="getProduct" parameterType="int"
+		resultMap="productSelectMap">
 		SELECT *
 		FROM product
 		WHERE prod_no = #{value}
@@ -58,51 +61,55 @@
 		</set>
 		WHERE prod_no = #{prodNo}
 	</update>
-	
-	
-	<!-- SELECT LIST :: ALL-->
+
+
+	<!-- SELECT LIST :: ALL -->
 	<select id="getProductList" parameterType="search"
 		resultMap="productSelectMap">
 		SELECT *
 		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
-				FROM 	( 	SELECT prod_code, prod_no, prod_name, price, cost, due_date
-							FROM product
-							<if test="searchCondition != null">
-								<where>
-									<if test="searchCondition >=100">
-										prod_code = #{searchCondition}
-									</if>
-									<if test="searchCondition == 0 and searchKeyword !='' ">
-										prod_name LIKE '%' || #{searchKeyword} || '%'
-									</if>
-									<if test="searchCondition == 1 and searchKeyword !='' ">
-										prod_no LIKE '%' || #{searchKeyword} || '%'
-									</if>
-								</where>
-							</if>
-							ORDER BY prod_no DESC) inner_table
-				WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+		FROM ( SELECT prod_code, prod_no, prod_name, price, cost, due_date
+		FROM product
+		<if test="searchCondition != null">
+			<where>
+				<if test="searchCondition >=100">
+					prod_code = #{searchCondition}
+				</if>
+				<if test="searchCondition == 0 and searchKeyword !='' ">
+					prod_name LIKE '%' || #{searchKeyword} || '%'
+				</if>
+				<if test="searchCondition == 1 and searchKeyword !='' ">
+					prod_no LIKE '%' || #{searchKeyword} || '%'
+				</if>
+			</where>
+		</if>
+		ORDER BY prod_no DESC) inner_table
+		WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND
+		#{endRowNum}
 	</select>
 
 
 	<!-- SELECT Row count -->
-	<select id="getTotalCount" parameterType="search" resultType="int">
+	<select id="getTotalCount" parameterType="search"
+		resultType="int">
 		SELECT COUNT(*)
-		FROM ( 	SELECT prod_code, prod_no, prod_name, price, cost, due_date
-				FROM product
-				<if test="searchCondition != null">
-					<where>
-						<if test="searchCondition >=100">
-							prod_code = #{searchCondition}
-						</if>
-						<if test="searchCondition == 0 and searchKeyword !='' ">
-							prod_name LIKE '%' || #{searchKeyword} || '%'
-						</if>
-						<if test="searchCondition == 1 and searchKeyword !='' ">
-							prod_no LIKE '%' || #{searchKeyword} || '%'
-						</if>			
-					</where>		
-				</if> ) countTable
+		FROM ( SELECT prod_code, prod_no, prod_name, price,
+		cost, due_date
+		FROM product
+		<if test="searchCondition != null">
+			<where>
+				<if test="searchCondition >=100">
+					prod_code = #{searchCondition}
+				</if>
+				<if test="searchCondition == 0 and searchKeyword !='' ">
+					prod_name LIKE '%' || #{searchKeyword} || '%'
+				</if>
+				<if test="searchCondition == 1 and searchKeyword !='' ">
+					prod_no LIKE '%' || #{searchKeyword} || '%'
+				</if>
+			</where>
+		</if>
+		) countTable
 	</select>
 </mapper>

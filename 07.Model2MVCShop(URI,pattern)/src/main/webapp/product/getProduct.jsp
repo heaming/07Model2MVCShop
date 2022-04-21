@@ -113,7 +113,16 @@
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td height="26">
-						<img src="/images/uploadFiles/${product.fileName}"/>
+						<c:if test="${empty product.fileName}">
+							이미지 없음
+						</c:if>
+						
+						
+						<c:forEach items="${product.fileName}" var="file">
+							<img src="/images/uploadFiles/${file}"/>
+						</c:forEach>					
+						
+						<%-- <img src="/images/uploadFiles/${product.fileName}"/> --%>
 					</td>
 				</tr>
 			</table>
@@ -137,7 +146,7 @@
 						<c:if test="${user.userId.equals(product.sellerId)}">
 							<a href="/product/updateProduct?prodNo=${product.prodNo}&menu=${menu}">수정</a>
 						</c:if>
-						<c:if test="${!(user.userId.equals( product.sellerId ))}">
+						<c:if test="${!(user.userId.equals(product.sellerId))}">
 							<a href="/product/addPurchase?prodNo=${product.prodNo}&menu=${menu}">구매</a>						
 						</c:if>
 					</td>

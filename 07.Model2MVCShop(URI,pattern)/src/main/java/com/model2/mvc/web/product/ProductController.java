@@ -1,8 +1,9 @@
 package com.model2.mvc.web.product;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,13 +12,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.model2.mvc.common.Page;
@@ -59,38 +58,45 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/addProduct", method=RequestMethod.POST)
-	public String addProduct(HttpSession session, @ModelAttribute("product") Product product, RedirectAttributes redirectAttributes, MultipartFile file) throws Exception {
+	public String addProduct(HttpSession session, @ModelAttribute("product") Product product, RedirectAttributes redirectAttributes, @RequestParam("multiFile") List<MultipartFile> files) throws Exception {
 
 		System.out.println("/addProduct : POST");
 
 		User user = (User) session.getAttribute("user");
+		
+		List<String> fileList = new ArrayList<String>();
 
 		product.setSellerId(user.getUserId());
+		
+		System.out.println(files);
 
 		
 		// file
-		if (file != null) {
-			
-			System.out.println(file);
-			
-			String fileName = file.getOriginalFilename();
-			
-			// String id = UUID.randomUUID().toString() + "_";
-			
+		if (!files.isEmpty()) {
+						
 			String uploadPath = "C:\\Users\\bitcamp\\git\\07Model2MVCShop\\07.Model2MVCShop(URI,pattern)\\src\\main\\webapp\\images\\uploadFiles";
-			File target = new File(uploadPath, fileName);
 			
 			if(!new File(uploadPath).exists()) {
 				new File(uploadPath).mkdir();
 			}
-									
-			file.transferTo(target);
+				
+			for(MultipartFile file : files) {
+				
+				String fileName = file.getOriginalFilename();
+				
+				System.out.println(fileName);
+				
+				File target = new File(uploadPath, fileName);
+				file.transferTo(target);
+				
+				fileList.add(fileName);					
+			}
 			
-			product.setFileName(fileName);						
+			String fileNames = String.join(",", fileList);
+			
+			product.setFileName(fileNames);	
 		}
 		
-		
-			
 		productService.addProduct(product);
 		
 		redirectAttributes.addFlashAttribute("product", product);
@@ -160,9 +166,31 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/updateProduct", method=RequestMethod.POST)
-	public String updateProduct( @ModelAttribute("product") Product product, @RequestParam("menu") String menu, Model model) throws Exception {
+	public String updateProduct( @ModelAttribute("product") Product product, @RequestParam("menu") String menu, MultipartFile file) throws Exception {
 		
 		System.out.println("/updateProduct : POST");
+		
+		// file
+		if (!file.isEmpty()) {
+			
+			System.out.println(file);
+			
+			String fileName = file.getOriginalFilename();
+			
+			// String id = UUID.randomUUID().toString() + "_";
+			
+			String uploadPath = "C:\\Users\\bitcamp\\git\\07Model2MVCShop\\07.Model2MVCShop(URI,pattern)\\src\\main\\webapp\\images\\uploadFiles";
+			File target = new File(uploadPath, fileName);
+			
+			if(!new File(uploadPath).exists()) {
+				new File(uploadPath).mkdir();
+			}
+									
+			file.transferTo(target);
+			
+			//product.setFileName(fileName);						
+		}
+		
 		
 		productService.updateProduct(product);
 

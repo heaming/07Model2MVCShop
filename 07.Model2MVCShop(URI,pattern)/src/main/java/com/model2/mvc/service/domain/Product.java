@@ -1,6 +1,9 @@
 package com.model2.mvc.service.domain;
 
 import java.sql.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class Product {
 	

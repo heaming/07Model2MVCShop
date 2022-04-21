@@ -55,16 +55,13 @@ function fncUpdateProduct(){
 }
 
 
-function test() {
-	console.log("버튼 눌림");
-}
 </script>
 
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
 
-<form name="detailForm"  method="post">
+<form name="detailForm"  method="post" enctype="multipart/form-data">
 
 <input type="hidden" name="prodNo" value="${product.prodNo}" >
 <input type="hidden" name="menu" value="${menu}" >
@@ -188,8 +185,8 @@ function test() {
 		<td width="104" class="ct_write">상품이미지</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<input	type="text" name="fileName" class="ct_input_g" 
-							style="width: 200px; height: 19px" maxLength="13" value="${product.fileName}"/>
+			<input	type="file" name="file" class="ct_input_g" 
+							style="width: 200px; height: 19px" maxLength="13" value="${product.fileName}" multiple/>
 		</td>
 	</tr>
 	<tr>
