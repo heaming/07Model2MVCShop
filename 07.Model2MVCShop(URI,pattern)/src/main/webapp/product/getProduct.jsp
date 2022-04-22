@@ -146,7 +146,7 @@
 						<c:if test="${user.userId.equals(product.sellerId)}">
 							<a href="/product/updateProduct?prodNo=${product.prodNo}&menu=${menu}">수정</a>
 						</c:if>
-						<c:if test="${!(user.userId.equals(product.sellerId))}">
+						<c:if test="${user.userId.equals(product.sellerId) == false}">
 							<a href="/product/addPurchase?prodNo=${product.prodNo}&menu=${menu}">구매</a>						
 						</c:if>
 					</td>
